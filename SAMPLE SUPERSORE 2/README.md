@@ -1,10 +1,10 @@
 # Retail Sales Visualization, Relationship Analysis & Business Insights
 
-## 📌 Project Overview
+##  Project Overview
 
 This project focuses on analyzing **Superstore retail sales data** through visualization and relationship analysis. The objective is to convert sales data into meaningful visual insights and identify important business patterns.
 
-## 🎯 Objectives
+##  Objectives
 
 * Visualize retail sales performance.
 * Analyze sales and profit across different categories.
@@ -13,7 +13,7 @@ This project focuses on analyzing **Superstore retail sales data** through visua
 * Identify important sales and profitability patterns.
 * Generate meaningful business insights.
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 * Python
 * Pandas
@@ -22,7 +22,7 @@ This project focuses on analyzing **Superstore retail sales data** through visua
 * Seaborn
 * Jupyter Notebook / Google Colab
 
-## 📂 Dataset
+##  Dataset
 
 The project uses the **Superstore Sales Dataset**, which contains information about:
 
@@ -36,7 +36,7 @@ The project uses the **Superstore Sales Dataset**, which contains information ab
 * Discount
 * Profit
 
-## 📊 Data Visualization
+##  Data Visualization
 
 The following visualizations can be created:
 
@@ -62,7 +62,7 @@ The following visualizations can be created:
 * Low-profit products
 * Category-wise product performance
 
-## 🔗 Relationship Analysis
+##  Relationship Analysis
 
 Relationships between important variables are analyzed using scatter plots and correlation analysis.
 
@@ -75,7 +75,7 @@ Examples include:
 
 A correlation matrix can be used to identify relationships among numerical variables.
 
-## 📈 Visualization Techniques
+## Visualization Techniques
 
 The project uses:
 
@@ -87,7 +87,7 @@ The project uses:
 * Scatter Plots
 * Heatmaps
 
-## 💡 Business Insights
+##  Business Insights
 
 The analysis can be used to identify:
 
@@ -101,7 +101,7 @@ The analysis can be used to identify:
 * Relationships between discount and profit.
 * Factors associated with sales and profitability.
 
-## 🔄 Project Workflow
+##  Project Workflow
 
 ```text
 Cleaned Dataset
@@ -121,6 +121,6 @@ Business Insights
 Conclusion
 ```
 
-## 🏁 Conclusion
+##  Conclusion
 
 This project demonstrates how visualization and relationship analysis can be used to understand retail sales data. The resulting insights provide a clear view of sales, profit, products, customers, and regional performance and can support data-driven business analysis.
