@@ -1,0 +1,58 @@
+# Student Performance Analysis
+
+A short Python script that visualizes how Math, Reading, and Writing scores
+relate to parental education, lunch type, and test preparation.
+
+## What It Does
+
+1. Grouped bar chart of average scores by **parental education level**
+2. Grouped bar chart of average scores by **lunch type**
+3. Box plots of score spread: **test prep completed vs none**
+4. Scatter plots (pairplot) between Math, Reading, and Writing
+5. Correlation heatmap of the three subjects
+
+## Requirements
+
+- Python 3.8+
+- pandas
+- matplotlib
+- seaborn
+
+Install them with:
+
+    pip install pandas matplotlib seaborn
+
+## Dataset
+
+Download **StudentsPerformance.csv** (Kaggle: "Students Performance in Exams")
+and place it in the same folder as the script.
+
+Required columns:
+
+| Column                       | Description                          |
+|------------------------------|--------------------------------------|
+| parental level of education  | Highest education of parent(s)       |
+| lunch                        | standard or free/reduced             |
+| test preparation course      | none or completed                    |
+| math score                   | 0-100                                |
+| reading score                | 0-100                                |
+| writing score                | 0-100                                |
+
+## How to Run
+
+    python analysis.py
+
+Five chart windows will open one after another. Close each window to
+see the next one.
+
+## Project Structure
+
+    project/
+    |-- analysis.py
+    |-- StudentsPerformance.csv
+    |-- README.md
+
+## How to Read the Charts
+
+- **Bar charts:** taller bars mean higher average scores. Compare bars across
+  groups to
