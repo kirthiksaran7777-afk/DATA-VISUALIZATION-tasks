@@ -722,3 +722,73 @@ y = House Price
 ---
 
 # ✂
+
+House Price Visualization, Spatial Analytics and Real Estate Insights
+
+Project Overview
+
+This project analyzes house price data using Python and creates visualizations to understand the factors affecting property prices. The analysis focuses on living area, property grade, waterfront status, and geographical location.
+
+Objectives
+
+Analyze the relationship between living area and house price.
+
+Visualize house price distributions across different property characteristics.
+
+Analyze the geographical distribution of house prices using latitude and longitude.
+
+Identify high value locations based on average property prices.
+
+Generate basic real estate investment insights from the dataset.
+
+Dataset
+
+The project uses the Household_preprecessed.csv dataset. The dataset contains information about residential properties, including price, living area, grade, waterfront status, latitude, longitude, and ZIP code.
+
+Technologies Used
+
+Python
+
+Pandas
+
+Seaborn
+
+Matplotlib
+
+Google Colab
+
+Visualizations
+
+The project creates a regression plot showing the relationship between living area and price.
+
+A box plot is used to compare prices based on waterfront status.
+
+A geographical scatter plot shows house prices using latitude and longitude, with colors representing price levels.
+
+The project also identifies the top high value ZIP codes based on average house price.
+
+Real Estate Insights
+
+The analysis helps identify locations with higher average property prices.
+
+Larger living areas can be associated with higher property prices.
+
+Waterfront properties can have different price distributions compared with non waterfront properties.
+
+Geographical price patterns can help identify premium real estate areas.
+
+High value ZIP codes can be considered for further real estate investment analysis.
+
+How to Run
+
+Upload Household_preprecessed.csv to Google Colab.
+
+Open the Python code in a Colab notebook.
+
+Run the code cells.
+
+Review the generated visualizations and investment summary.
+
+Conclusion
+
+This project demonstrates how data visualization and spatial analysis can be used to understand residential property prices. The results can support further real estate research, location analysis, and investment decision making.
