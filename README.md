@@ -374,3 +374,351 @@ The Healthcare analysis focuses on **data understanding, cleaning, visualization
 The Student Performance analysis focuses on **data understanding, cleaning, and feature engineering**.
 
 Together, these notebooks demonstrate how Python can be used to transform raw datasets into structured information and meaningful analytical insights.
+#  King County House Price Prediction
+
+##  Project Overview
+
+This project focuses on analyzing the **King County House Sales dataset** and developing a machine-learning model to predict residential house prices.
+
+The dataset contains **21,613 house-sale records** with information about property size, bedrooms, bathrooms, location, condition, construction quality, waterfront status, and other characteristics that may influence house prices.
+
+The primary objective of this project is to build a **regression model** that can predict the sale price of a house based on its features.
+
+---
+
+## Objectives
+
+The main objectives of this project are:
+
+- Understand and explore the house-sales dataset.
+- Perform exploratory data analysis (EDA).
+- Clean and preprocess the data.
+- Identify important factors affecting house prices.
+- Perform feature engineering.
+- Build machine-learning regression models.
+- Compare model performance.
+- Evaluate predictions using appropriate regression metrics.
+- Identify the most important features influencing house prices.
+
+---
+
+##  Dataset
+
+The dataset is stored in:
+
+```text
+kc_house_data.csv
+```
+
+### Dataset Information
+
+| Property | Value |
+|---|---:|
+| Number of records | 21,613 |
+| Number of columns | 21 |
+| Target variable | `price` |
+| Problem type | Regression |
+| Geographic area | King County, Washington |
+
+---
+
+## 🧾 Dataset Columns
+
+| Column | Description |
+|---|---|
+| `id` | Unique identifier for each property |
+| `date` | Date on which the house sale was recorded |
+| `price` | Sale price of the house |
+| `bedrooms` | Number of bedrooms |
+| `bathrooms` | Number of bathrooms |
+| `sqft_living` | Interior living area in square feet |
+| `sqft_lot` | Total lot area in square feet |
+| `floors` | Number of floors |
+| `waterfront` | Indicates whether the property has a waterfront location |
+| `view` | Quality of the property's view |
+| `condition` | Overall condition of the property |
+| `grade` | Overall construction/design quality |
+| `sqft_above` | Living area above ground level |
+| `sqft_basement` | Basement area in square feet |
+| `yr_built` | Year the property was originally built |
+| `yr_renovated` | Year the property was renovated |
+| `zipcode` | ZIP code of the property |
+| `lat` | Latitude |
+| `long` | Longitude |
+| `sqft_living15` | Average living area of the 15 nearest properties |
+| `sqft_lot15` | Average lot area of the 15 nearest properties |
+
+---
+
+##Target Variable
+
+The target variable for this project is:
+
+```text
+price
+```
+
+`price` represents the actual sale price of the property.
+
+The machine-learning problem can therefore be represented as:
+
+```text
+House Features → Machine Learning Model → Predicted House Price
+```
+
+---
+
+#  Exploratory Data Analysis
+
+Exploratory Data Analysis is performed to understand the structure of the dataset and discover relationships between different variables.
+
+### Data Loading
+
+```python
+import pandas as pd
+
+df = pd.read_csv("kc_house_data.csv")
+
+print(df.head())
+print(df.shape)
+print(df.info())
+```
+
+### Summary Statistics
+
+```python
+print(df.describe())
+```
+
+This helps identify:
+
+- Mean
+- Median
+- Minimum
+- Maximum
+- Standard deviation
+- Quartiles
+
+for the numerical variables.
+
+---
+
+##  Checking Missing Values
+
+```python
+print(df.isnull().sum())
+```
+
+Missing values should be identified before training a machine-learning model.
+
+Possible strategies include:
+
+- Removing missing records
+- Filling numerical values with the median
+- Filling categorical values with the mode
+- Using advanced imputation techniques
+
+---
+
+##  Checking Duplicate Records
+
+```python
+print(df.duplicated().sum())
+```
+
+Duplicate records should be investigated and removed if they represent duplicate observations.
+
+---
+
+#  Data Visualization
+
+Visualization helps understand relationships between house characteristics and prices.
+
+### House Price Distribution
+
+```python
+import matplotlib.pyplot as plt
+
+plt.hist(df["price"], bins=50)
+plt.xlabel("House Price")
+plt.ylabel("Number of Houses")
+plt.title("Distribution of House Prices")
+plt.show()
+```
+
+House prices are typically right-skewed, with a relatively small number of very expensive properties.
+
+---
+
+##  Living Area vs Price
+
+```python
+plt.scatter(df["sqft_living"], df["price"], alpha=0.3)
+plt.xlabel("Living Area (sqft)")
+plt.ylabel("Price")
+plt.title("Living Area vs House Price")
+plt.show()
+```
+
+This analysis can help determine whether larger living areas are associated with higher property prices.
+
+---
+
+##  Bedrooms vs Price
+
+```python
+import seaborn as sns
+
+sns.boxplot(x="bedrooms", y="price", data=df)
+plt.title("Bedrooms vs House Price")
+plt.show()
+```
+
+This helps analyze how house prices vary according to the number of bedrooms.
+
+---
+
+##  Grade vs Price
+
+```python
+sns.boxplot(x="grade", y="price", data=df)
+plt.title("Grade vs House Price")
+plt.show()
+```
+
+The `grade` variable represents the construction and design quality of the property and can be an important predictor of price.
+
+---
+
+# Correlation Analysis
+
+Correlation can be used to understand relationships between numerical variables.
+
+```python
+correlation = df.corr(numeric_only=True)
+
+print(correlation["price"].sort_values(ascending=False))
+```
+
+A heatmap can also be used:
+
+```python
+plt.figure(figsize=(14, 10))
+
+sns.heatmap(
+    correlation,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f"
+)
+
+plt.title("Correlation Matrix")
+plt.show()
+```
+
+Features such as `sqft_living`, `grade`, `bathrooms`, `view`, and geographic variables may show meaningful relationships with house prices.
+
+---
+
+#  Data Preprocessing
+
+Before training machine-learning models, the data needs to be prepared.
+
+## Date Conversion
+
+The `date` column can be converted to a datetime format:
+
+```python
+df["date"] = pd.to_datetime(df["date"])
+```
+
+Additional features can then be extracted:
+
+```python
+df["sale_year"] = df["date"].dt.year
+df["sale_month"] = df["date"].dt.month
+```
+
+---
+
+##  House Age
+
+A useful feature is the age of the property at the time of sale.
+
+```python
+df["house_age"] = df["sale_year"] - df["yr_built"]
+```
+
+This may provide more useful information to a model than the original construction year alone.
+
+---
+
+##  Renovation Feature
+
+The `yr_renovated` column may contain `0` when a property has no recorded renovation.
+
+A binary feature can be created:
+
+```python
+df["was_renovated"] = (df["yr_renovated"] > 0).astype(int)
+```
+
+---
+
+## 📐 Total Living Area
+
+A combined area feature can also be created:
+
+```python
+df["total_sqft"] = (
+    df["sqft_living"] +
+    df["sqft_basement"]
+)
+```
+
+---
+
+# Feature Engineering
+
+Potential engineered features include:
+
+- House age
+- Whether the house was renovated
+- Total square footage
+- Sale year
+- Sale month
+- Square footage per bedroom
+- Living-area-to-lot-area ratio
+- Years since renovation
+- Geographic clusters
+
+Example:
+
+```python
+df["sqft_per_bedroom"] = (
+    df["sqft_living"] / df["bedrooms"]
+)
+
+df["living_lot_ratio"] = (
+    df["sqft_living"] / df["sqft_lot"]
+)
+```
+
+Feature engineering can help machine-learning models identify patterns that are not directly represented by the original variables.
+
+---
+
+#  Machine Learning
+
+This project is a **supervised learning regression problem**.
+
+The input variables are the house characteristics, while the output variable is the house sale price.
+
+```text
+X = House Features
+y = House Price
+```
+
+---
+
+# ✂
